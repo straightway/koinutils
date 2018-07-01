@@ -13,11 +13,9 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-ext.uploadToRepository = true
 
-dependencies {
-    compile koin()
-    testCompile junit5("api")
-    testCompile straightway('testing')
-    testCompile mockitoKotlin()
+if (rootProject.name != "straightway") {
+    rootProject.projectDir = new File(rootProject.projectDir.parent)
 }
+
+apply from: "projectDependencies.gradle"

@@ -1,7 +1,7 @@
 # koinutils
-Utlitities for the Koin dependency injection framework
+Utlitities for the Koin dependency injection framework in kotlin.
 
-Allows building local contexts and instantiating classes using these local contexts. These classes may access Koin beans, factories and properies if they implement the `KoinModuleComponent` interface (preferably by the instance returned by `KoinModuleComponent()`).
+This library allows building local contexts and instantiating classes using these local contexts (instead of a global context established with `startKoin`). These classes may access Koin beans, factories and properies if they implement the `KoinModuleComponent` interface (preferably by the instance returned by `KoinModuleComponent()`).
 
 Example:
 
@@ -31,3 +31,24 @@ This allows having different contexts and module sets for each instantiation, an
 A component once instantiated with a context keeps this context. If it injects other components or gets them later on, it uses this stored context and is thus independent of other components with a different context.
 
 The context is assigned in a thread safe way to the components, so using this feature simultaneously in multiple threads is no problem.
+
+## Status
+
+This software is in pre-release state. Every aspect of it may change without announcement or notification or downward
+compatibility. As soon as version 1.0 is reached, all subsequent changes for sub
+versions will be downward compatible. Breaking changes will then only occur with a new major version with according deprecation marking.
+
+## Include in gradle builds
+
+To include this library in a gradle build, add
+
+    repositories {
+        ...
+        maven { url "https://straightway.github.io/repo" }
+    }
+
+Then you can simply configure in your dependencies:
+
+    dependencies {
+        compile "straightway:koinutils:<version>"
+    }

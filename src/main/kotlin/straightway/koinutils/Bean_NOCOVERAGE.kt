@@ -47,4 +47,15 @@ object Bean {
 
     inline fun <reified T> KoinModuleComponent.get(noinline parameters: Parameters) =
             withOwnContext { get<T>("", parameters) }
+
+    inline fun <reified T> get(name: String = "") =
+            KoinModuleComponent.currentContext!!.get<T>(name)
+
+    inline fun <reified T> get(
+            name: String,
+            noinline parameters: Parameters) =
+            KoinModuleComponent.currentContext!!.get<T>(name, parameters)
+
+    inline fun <reified T> get(noinline parameters: Parameters) =
+            KoinModuleComponent.currentContext!!.get<T>("", parameters)
 }

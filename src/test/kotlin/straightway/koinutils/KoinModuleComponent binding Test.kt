@@ -15,6 +15,7 @@
  */
 package straightway.koinutils
 
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.koin.dsl.context.Context
 import straightway.expr.minus
@@ -188,6 +189,50 @@ class `KoinModuleComponent binding Test` : KoinLoggingDisabler() {
                 declare { bean { it.get<Double>("p") } }
             } when_ {
                 sut.get<Double> { mapOf("p" to 3.14) }
+            } then {
+                expect(it.result is_ Equal to_ 3.14)
+            }
+
+    private infix fun <T> WithModules.makeWithoutContext(init: () -> T): T {
+        return make { init() }
+    }
+
+    @Test
+    fun `static get without name and parameters returns bean by type`() =
+            Given {
+                withContext { bean { "Hello" } }
+            } when_ {
+                makeWithoutContext { get<String>() }
+            } then {
+                expect(it.result is_ Equal to_ "Hello")
+            }
+
+    @Test
+    fun `static get with name and without parameters returns bean by name`() =
+            Given {
+                withContext { bean("bean") { "Hello" } }
+            } when_ {
+                makeWithoutContext { get<String>("bean") }
+            } then {
+                expect(it.result is_ Equal to_ "Hello")
+            }
+
+    @Test
+    fun `static get with name and parameters returns bean by name`() =
+            Given {
+                withContext { bean("fun") { it.get<Int>("p") } }
+            } when_ {
+                makeWithoutContext { get<Int>("fun") { mapOf("p" to 2) } }
+            } then {
+                expect(it.result is_ Equal to_ 2)
+            }
+
+    @Test
+    fun `static get without name and with parameters returns bean by type`() =
+            Given {
+                withContext { bean { it.get<Double>("p") } }
+            } when_ {
+                makeWithoutContext { get<Double> { mapOf("p" to 3.14) } }
             } then {
                 expect(it.result is_ Equal to_ 3.14)
             }

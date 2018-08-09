@@ -15,7 +15,6 @@
  */
 package straightway.koinutils
 
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.koin.dsl.context.Context
 import straightway.expr.minus

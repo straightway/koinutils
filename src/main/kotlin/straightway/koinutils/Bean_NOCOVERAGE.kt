@@ -58,4 +58,12 @@ object Bean {
 
     inline fun <reified T> get(noinline parameters: Parameters) =
             KoinModuleComponent.currentContext!!.get<T>("", parameters)
+
+    /**
+     * Get a value from the koin context via a KoinModuleComponent at
+     * initialization time, e.g. when implementing interfaces using the by
+     * keyword using another component retrieved from koin.
+     */
+    inline fun <reified T> init(getter: KoinModuleComponent.() -> T) =
+            KoinModuleComponent().getter()
 }

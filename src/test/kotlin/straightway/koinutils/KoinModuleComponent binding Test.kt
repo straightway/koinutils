@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test
 import org.koin.dsl.context.Context
 import straightway.expr.minus
 import straightway.koinutils.Bean.get
+import straightway.koinutils.Bean.init
 import straightway.koinutils.Bean.inject
 import straightway.koinutils.Property.property
 import straightway.testing.bdd.Given
@@ -232,6 +233,16 @@ class `KoinModuleComponent binding Test` : KoinLoggingDisabler() {
                 withContext { bean { it.get<Double>("p") } }
             } when_ {
                 makeWithoutContext { get<Double> { mapOf("p" to 3.14) } }
+            } then {
+                expect(it.result is_ Equal to_ 3.14)
+            }
+
+    @Test
+    fun `static init calls getter with temporary KoinModuleComponent`() =
+            Given {
+                withContext { bean { it.get<Double>("p") } }
+            } when_ {
+                makeWithoutContext { init { get<Double> { mapOf("p" to 3.14) } } }
             } then {
                 expect(it.result is_ Equal to_ 3.14)
             }

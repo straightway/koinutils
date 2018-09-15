@@ -13,6 +13,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
+// ktlint-disable filename
 package straightway.koinutils
 
 import org.junit.jupiter.api.Test
@@ -75,7 +77,7 @@ class `KoinModuleComponent property test` : KoinLoggingDisabler() {
     fun `getProperty with converter`() =
             testBinding when_ {
                 declare { koinContext.setProperty("Property.Key", "A") }
-            } then {
+            } then { _ ->
                 expect(sut.getProperty("Property.Key") { it + it } is_ Equal to_ "AA")
             }
 
@@ -83,7 +85,7 @@ class `KoinModuleComponent property test` : KoinLoggingDisabler() {
     fun `getProperty with converter and default value`() =
             testBinding when_ {
                 declare { }
-            } then {
+            } then { _ ->
                 expect(sut.getProperty("Property.Key", "B") { it + it } is_ Equal to_ "B")
             }
 

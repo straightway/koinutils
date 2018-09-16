@@ -1,3 +1,4 @@
+// ktlint-disable filename
 /*
  * Copyright 2016 github.com/straightway
  *
@@ -14,7 +15,6 @@
  *  limitations under the License.
  */
 
-// ktlint-disable filename
 @file:Suppress("MatchingDeclarationName")
 package straightway.koinutils
 

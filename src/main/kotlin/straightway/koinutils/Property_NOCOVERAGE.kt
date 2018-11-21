@@ -56,7 +56,7 @@ object Property {
     ) =
             converter(context.getProperty(key))
 
-    @Suppress("LongParameterList")
+    @Suppress("LongParameterList", "SwallowedException")
     inline fun <reified T> KoinModuleComponent.getProperty(
             key: String,
             default: T,

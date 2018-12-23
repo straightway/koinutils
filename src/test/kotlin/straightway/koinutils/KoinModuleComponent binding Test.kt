@@ -34,7 +34,7 @@ import straightway.testing.flow.does
 import straightway.testing.flow.expect
 import straightway.testing.flow.is_
 import straightway.testing.flow.to_
-import javax.activity.InvalidActivityException
+import java.util.InvalidPropertiesFormatException
 
 class `KoinModuleComponent binding Test` : KoinLoggingDisabler() {
 
@@ -274,8 +274,8 @@ class `KoinModuleComponent binding Test` : KoinLoggingDisabler() {
             testBinding while_ {
                 declare { }
             } when_ {
-                expect({ sut.withOwnContext { throw InvalidActivityException() } }
-                               does Throw.type<InvalidActivityException>())
+                expect({ sut.withOwnContext { throw InvalidPropertiesFormatException("") } }
+                               does Throw.type<InvalidPropertiesFormatException>())
             } then {
                 expect({ KoinModuleComponent.currentContext }
                                does Throw.type<ConstructedWithoutKoinModulesException>())
